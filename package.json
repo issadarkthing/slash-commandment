@@ -1,0 +1,23 @@
+{
+  "name": "@jiman24/slash-commandment",
+  "version": "0.0.1",
+  "description": "slash command framework",
+  "main": "dist/index.js",
+  "author": "issadarkthin",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon ./dist/test/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "common-tags": "^1.8.1",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "table-layout": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/common-tags": "^1.8.1",
+    "typescript": "^4.4.4"
+  }
+}
