@@ -19,12 +19,14 @@ export class CommandManager {
   verbose = true;
   readonly client: Client;
   readonly devGuildID: string;
+  readonly isDev: boolean;
   private commandRegisterLog: CommandLog[] = [];
   private commands = new Map<string, Command>();
 
-  constructor(client: Client, devGuildID: string) {
+  constructor(client: Client, devGuildID: string, isDev = true) {
     this.client = client;
     this.devGuildID = devGuildID;
+    this.isDev = isDev;
   }
 
   private log(...values: any[]) {
@@ -55,7 +57,8 @@ export class CommandManager {
       await this.client.guilds.fetch();
       const devGuild = this.client.guilds.cache.get(this.devGuildID);
 
-      const commands = devGuild?.commands || this.client.application?.commands;
+      const commands = this.isDev ? 
+        devGuild?.commands : this.client.application?.commands;
 
       if (commands) {
 
