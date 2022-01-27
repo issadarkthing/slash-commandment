@@ -1,6 +1,6 @@
 {
   "name": "@jiman24/slash-commandment",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "slash command framework",
   "main": "dist/index.js",
   "author": "issadarkthing",
@@ -11,6 +11,7 @@
     "dev": "nodemon ./dist/test/index.js"
   },
   "dependencies": {
+    "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
     "chalk": "^4.1.2",
     "common-tags": "^1.8.1",

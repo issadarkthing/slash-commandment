@@ -70,10 +70,7 @@ export class CommandManager {
 
       if (commands) {
 
-        commands.push({
-          name: command.name,
-          description: command.description,
-        })
+        commands.push(command.toJSON());
 
         this.commandRegisterLog.push({
           name: command.name,
