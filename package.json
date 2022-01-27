@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "slash command framework",
   "main": "dist/index.js",
-  "author": "issadarkthin",
+  "author": "issadarkthing",
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
