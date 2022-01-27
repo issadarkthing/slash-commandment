@@ -1,10 +1,12 @@
-import { Client, Interaction, Guild } from "discord.js";
+import { Client, Interaction } from "discord.js";
 import chalk from "chalk";
 import util from "util";
 import fs from "fs"
 import path from "path";
 import { Command } from "./Command";
 import { oneLine } from "common-tags";
+import { Routes } from "discord-api-types/v9";
+import { REST } from "@discordjs/rest";
 //@ts-ignore
 import Table from "table-layout";
 
@@ -40,6 +42,11 @@ export class CommandManager {
     const files = await readdir(dir);
     const initial = performance.now();
 
+    const rest = new REST({ version: '9' }).setToken(this.client.token!);
+
+
+    const commands: unknown[] = [];
+
     for (const file of files) {
       // skip .d.ts files
       if (file.endsWith(".d.ts")) continue;
@@ -54,15 +61,10 @@ export class CommandManager {
 
       if (command.disable) continue;
 
-      await this.client.guilds.fetch();
-      const devGuild = this.client.guilds.cache.get(this.devGuildID);
-
-      const commands = this.isDev ? 
-        devGuild?.commands : this.client.application?.commands;
 
       if (commands) {
 
-        commands.create({
+        commands.push({
           name: command.name,
           description: command.description,
         })
@@ -75,6 +77,20 @@ export class CommandManager {
         this.commands.set(command.name, command);
       }
     }
+
+    const commandType = this.isDev ? "application" : "global";
+
+    console.log(`Started refreshing ${commandType} (/) commands.`);
+
+    const discordCmdManager = this.isDev ? 
+      Routes.applicationGuildCommands : Routes.applicationCommands;
+
+    await rest.put(
+      discordCmdManager(this.client.user!.id, this.devGuildID),
+      { body: commands },
+    );
+
+    console.log(`Successfully reloaded ${commandType} (/) commands.`);
 
     const now = performance.now();
     const timeTaken = (now - initial).toFixed(4);
