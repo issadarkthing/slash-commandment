@@ -28,8 +28,8 @@ export class CommandManager {
   readonly client: Client;
   readonly devGuildID: string;
   readonly isDev: boolean;
+  commands = new Map<string, Command>();
   private commandRegisterLog: CommandLog[] = [];
-  private commands = new Map<string, Command>();
 
   constructor(options: CommandManagerOptions) {
     this.client = options.client;
