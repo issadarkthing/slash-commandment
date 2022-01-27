@@ -17,6 +17,12 @@ interface CommandLog {
   timeTaken: number;
 }
 
+interface CommandManagerOptions {
+  client: Client;
+  devGuildID: string;
+  isDev?: boolean;
+}
+
 export class CommandManager {
   verbose = true;
   readonly client: Client;
@@ -25,10 +31,10 @@ export class CommandManager {
   private commandRegisterLog: CommandLog[] = [];
   private commands = new Map<string, Command>();
 
-  constructor(client: Client, devGuildID: string, isDev = true) {
-    this.client = client;
-    this.devGuildID = devGuildID;
-    this.isDev = isDev;
+  constructor(options: CommandManagerOptions) {
+    this.client = options.client;
+    this.devGuildID = options.devGuildID;
+    this.isDev = options.isDev || true;
   }
 
   private log(...values: any[]) {
