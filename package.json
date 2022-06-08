@@ -1,6 +1,6 @@
 {
   "name": "@jiman24/slash-commandment",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "slash command framework",
   "main": "dist/index.js",
   "author": "issadarkthing",
