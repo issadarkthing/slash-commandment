@@ -1,4 +1,4 @@
-import { Client, CommandInteraction, Interaction } from "discord.js";
+import { Client, CommandInteraction, Interaction, MessageEmbed } from "discord.js";
 import chalk from "chalk";
 import util from "util";
 import fs from "fs"
@@ -10,6 +10,7 @@ import { REST } from "@discordjs/rest";
 //@ts-ignore
 import Table from "table-layout";
 import { CommandError } from "./Error";
+import { CooldownManager, TimeLeft } from "./CooldownManager";
 
 const readdir = util.promisify(fs.readdir);
 
@@ -30,7 +31,13 @@ export class CommandManager {
   readonly devGuildID: string;
   readonly isDev: boolean;
   commands = new Map<string, Command>();
+  private cooldown = new CooldownManager();
   private commandRegisterLog: CommandLog[] = [];
+  private commandOnCooldownHandler?: (
+    i: CommandInteraction,
+    command: Command,
+    timeLeft: TimeLeft,
+  ) => void;
   private commandErrorHandler?: (i: CommandInteraction, err: CommandError) => void;
 
   constructor(options: CommandManagerOptions) {
@@ -127,11 +134,50 @@ export class CommandManager {
     this.commandErrorHandler = fn;
   }
 
+  handleCommandOnCooldown(fn: (i: CommandInteraction, command: Command, timeLeft: TimeLeft) => void) {
+    this.commandOnCooldownHandler = fn;
+  }
+
   async handleInteraction(i: Interaction) {
 
     if (!i.isCommand()) return;
 
-    const command = this.commands.get(i.commandName);
+    const command = this.commands.get(i.commandName)!;
+
+    if (command.cooldown) {
+
+      const authorID = i.user.id;
+      const isCooldown = await this.cooldown.isOnCooldown(command.name, authorID);
+
+      if (isCooldown) {
+
+        const timeLeft = await this.cooldown.getTimeLeft(command.name, authorID);
+
+
+        if (this.commandOnCooldownHandler) {
+          this.commandOnCooldownHandler(i, command, timeLeft);
+        } else {
+          const { hours, minutes, seconds } = timeLeft;
+          i.reply(`This command is on cooldown for ${hours}h ${minutes}m ${seconds}s`);
+        }
+
+        this.log(
+          `${chalk.blue(command.name)} command is on cooldown`
+        );
+        return;
+
+      }
+
+      const commandUsage = await this.cooldown.getCommandUsage(command.name, authorID) + 1;
+
+      if (commandUsage >= command.usageBeforeCooldown) {
+        await this.cooldown.setCooldown(command.name, authorID, command.cooldown);
+        await this.cooldown.resetComandUsage(command.name, authorID);
+      } else {
+        await this.cooldown.incCommandUsage(command.name, authorID);
+      }
+
+    }
 
     try {
 
