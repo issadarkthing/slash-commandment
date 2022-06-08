@@ -1,4 +1,4 @@
-import { Client, CommandInteraction, Interaction, MessageEmbed } from "discord.js";
+import { Client, CommandInteraction, Interaction } from "discord.js";
 import chalk from "chalk";
 import util from "util";
 import fs from "fs"
@@ -13,6 +13,8 @@ import { CommandError } from "./Error";
 import { CooldownManager, TimeLeft } from "./CooldownManager";
 
 const readdir = util.promisify(fs.readdir);
+
+export type Exec = Command["exec"];
 
 interface CommandLog {
   name: string;
@@ -181,7 +183,18 @@ export class CommandManager {
 
     try {
 
-      command && await command.exec(i);
+      if (command) {
+
+        for (const preExec of command.preExec) {
+          await preExec(i);
+        }
+
+        await command.exec(i);
+
+        for (const postExec of command.postExec) {
+          await postExec(i);
+        }
+      }
 
     } catch (e) {
 
