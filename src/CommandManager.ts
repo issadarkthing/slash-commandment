@@ -1,4 +1,4 @@
-import { Client, Interaction } from "discord.js";
+import { Client, CommandInteraction, Interaction } from "discord.js";
 import chalk from "chalk";
 import util from "util";
 import fs from "fs"
@@ -9,6 +9,7 @@ import { Routes } from "discord-api-types/v9";
 import { REST } from "@discordjs/rest";
 //@ts-ignore
 import Table from "table-layout";
+import { CommandError } from "./Error";
 
 const readdir = util.promisify(fs.readdir);
 
@@ -30,6 +31,7 @@ export class CommandManager {
   readonly isDev: boolean;
   commands = new Map<string, Command>();
   private commandRegisterLog: CommandLog[] = [];
+  private commandErrorHandler?: (i: CommandInteraction, err: CommandError) => void;
 
   constructor(options: CommandManagerOptions) {
     this.client = options.client;
@@ -121,12 +123,27 @@ export class CommandManager {
     );
   }
 
+  handleCommandError(fn: (i: CommandInteraction, err: CommandError) => void) {
+    this.commandErrorHandler = fn;
+  }
+
   async handleInteraction(i: Interaction) {
 
     if (!i.isCommand()) return;
 
     const command = this.commands.get(i.commandName);
 
-    command && await command.exec(i);
+    try {
+
+      command && await command.exec(i);
+
+    } catch (e) {
+
+      if (e instanceof CommandError && this.commandErrorHandler) {
+        this.commandErrorHandler(i, e);
+      } else {
+        console.error(e);
+      }
+    }
   }
 }
