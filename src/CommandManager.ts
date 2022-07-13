@@ -45,7 +45,7 @@ export class CommandManager {
   constructor(options: CommandManagerOptions) {
     this.client = options.client;
     this.devGuildID = options.devGuildID;
-    this.isDev = options.isDev || true;
+    this.isDev = options.isDev === undefined ? true : options.isDev;
   }
 
   private log(...values: any[]) {
