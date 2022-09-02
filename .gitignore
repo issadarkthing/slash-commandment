@@ -3,4 +3,4 @@ dist/
 .env
 test/
 
-data
+data/
