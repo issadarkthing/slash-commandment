@@ -12,6 +12,8 @@ export abstract class Command extends SlashCommandBuilder {
   preExec: Exec[] = [];
   postExec: Exec[] = [];
   abstract exec(i: CommandInteraction): Promise<void>;
+  
+  async commandOptions(): Promise<void> {};
 
   usageBeforeCooldown = 1;
   cooldown?: Duration;

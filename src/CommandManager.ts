@@ -81,6 +81,7 @@ export class CommandManager {
 
       if (commands) {
 
+        await command.commandOptions();
         commands.push(command.toJSON());
 
         this.commandRegisterLog.push({
