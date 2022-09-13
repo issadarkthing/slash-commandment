@@ -147,7 +147,7 @@ export class CommandManager {
 
     const command = this.commands.get(i.commandName)!;
 
-    if (command.cooldown) {
+    if (command?.cooldown) {
 
       const authorID = i.user.id;
       const isCooldown = await this.cooldown.isOnCooldown(command.name, authorID);
