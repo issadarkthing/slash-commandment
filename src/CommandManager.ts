@@ -52,6 +52,27 @@ export class CommandManager {
     this.verbose && console.log(...values);
   }
 
+  async loadCommands(dir: string) {
+    const files = await readdir(dir);
+
+    for (const file of files) {
+      // skip .d.ts files
+      if (file.endsWith(".d.ts")) continue;
+
+      const filePath = path.join(dir, file);
+      // eslint-disable-next-line
+      const cmdFile = require(filePath);
+      const command: Command = new cmdFile.default();
+
+      if (command.disable) continue;
+
+      await command.commandOptions();
+      this.commands.set(command.name, command);
+    }
+
+    console.log("Commands successfully updated!");
+  }
+
   async registerCommands(dir: string) {
 
     this.log(`=== ${chalk.blue("Registering command(s)")} ===`);

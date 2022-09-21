@@ -8,7 +8,8 @@
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc",
-    "dev": "nodemon ./dist/test/index.js"
+    "dev": "nodemon ./dist/test/index.js",
+    "upload": "node dist/test/uploadCommands.js"
   },
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
