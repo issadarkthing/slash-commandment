@@ -56,8 +56,8 @@ export class CommandManager {
     const files = await readdir(dir);
 
     for (const file of files) {
-      // skip .d.ts files
-      if (file.endsWith(".d.ts")) continue;
+      // skip all non-js files
+      if (!file.endsWith(".js")) continue;
 
       const filePath = path.join(dir, file);
       // eslint-disable-next-line
@@ -92,15 +92,12 @@ export class CommandManager {
 
     const files = await readdir(dir);
     const initial = performance.now();
-
     const rest = new REST({ version: '9' }).setToken(this.client.token!);
-
-
     const commands: unknown[] = [];
 
     for (const file of files) {
-      // skip .d.ts files
-      if (file.endsWith(".d.ts")) continue;
+      // skip all non js files
+      if (!file.endsWith(".js")) continue;
 
       const initial = performance.now();
       const filePath = path.join(dir, file);
@@ -112,19 +109,15 @@ export class CommandManager {
 
       if (command.disable) continue;
 
+      await command.commandOptions();
+      commands.push(command.toJSON());
 
-      if (commands) {
+      this.commandRegisterLog.push({
+        name: command.name,
+        timeTaken,
+      });
 
-        await command.commandOptions();
-        commands.push(command.toJSON());
-
-        this.commandRegisterLog.push({
-          name: command.name,
-          timeTaken,
-        });
-
-        this.commands.set(command.name, command);
-      }
+      this.commands.set(command.name, command);
     }
 
     const commandType = this.isDev ? "application" : "global";
