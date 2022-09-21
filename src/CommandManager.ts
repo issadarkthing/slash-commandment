@@ -73,6 +73,19 @@ export class CommandManager {
     console.log("Commands successfully updated!");
   }
 
+  async clearCommands() {
+    const rest = new REST({ version: '9' }).setToken(this.client.token!);
+    const discordCmdManager = this.isDev ? 
+      Routes.applicationGuildCommands : Routes.applicationCommands;
+
+    await rest.put(
+      discordCmdManager(this.client.user!.id, this.devGuildID),
+      { body: [] },
+    );
+
+    console.log("All commands has been successfully removed");
+  }
+
   async registerCommands(dir: string) {
 
     this.log(`=== ${chalk.blue("Registering command(s)")} ===`);
