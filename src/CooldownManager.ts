@@ -1,7 +1,6 @@
 import { DateTime, DurationLikeObject } from "luxon";
 import Josh from "@joshdb/core";
-//@ts-ignore
-import provider from "@joshdb/sqlite";
+import provider from "@joshdb/json";
 
 export interface TimeLeft {
   hours: number;
