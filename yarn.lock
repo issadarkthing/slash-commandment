@@ -112,27 +112,17 @@
     lodash "^4.17.20"
     serialize-javascript "^6.0.0"
 
-"@joshdb/json@^3.0.0-next.4b1f96e.0":
-  version "3.0.0-next.4b1f96e.0"
-  resolved "https://registry.yarnpkg.com/@joshdb/json/-/json-3.0.0-next.4b1f96e.0.tgz#cad0ed90a15559a9868aa7870f83b818ade7a352"
-  integrity sha512-VFmaDjAgUIp18vH9zonn3BZLKnbVkRNtYJUqarIJ+f0G9Y4su55SWrV9pVz+qSMgHD4Z60oJyQuZmX1ckFI8GA==
+"@joshdb/json@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@joshdb/json/-/json-1.0.5.tgz#d8d8235c27e8f9a5b49de11a1e8c03613468b04a"
+  integrity sha512-qEl/ev9dnrTxcnoowy462PFVsDknpCLNhZdvW754ZmPAswb1E4TjOkXbDD50flZRZV5twNZq3IHrqtG7O2BiMQ==
   dependencies:
-    "@joshdb/provider" "2.0.0-next.df53d54.0"
-    "@sapphire/async-queue" "^1.5.4"
-    "@sapphire/snowflake" "^3.5.4"
-    "@sapphire/utilities" "^3.18.0"
-    better-serialize "^2.0.0"
-    property-helpers "^2.0.0"
+    atomically "^1.7.0"
+    on-change "^2.2.2"
+    serialize-javascript "^5.0.1"
+    uuid "^8.3.2"
 
-"@joshdb/provider@2.0.0-next.df53d54.0":
-  version "2.0.0-next.df53d54.0"
-  resolved "https://registry.yarnpkg.com/@joshdb/provider/-/provider-2.0.0-next.df53d54.0.tgz#c7178a7c0ea9743354a181de425e8b7c017a206a"
-  integrity sha512-eKvnrCKDqztBun43mLE4FNy/d/PN6xb2BsQZsm5wdJ728r++Fyx0Z4rgYomMpD3O5kPbZUfW20DMMn+GSqHA+A==
-  dependencies:
-    "@sapphire/utilities" "^3.17.0"
-    reflect-metadata "^0.2.1"
-
-"@sapphire/async-queue@^1.1.9", "@sapphire/async-queue@^1.5.2", "@sapphire/async-queue@^1.5.3", "@sapphire/async-queue@^1.5.4":
+"@sapphire/async-queue@^1.1.9", "@sapphire/async-queue@^1.5.2", "@sapphire/async-queue@^1.5.3":
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.5.5.tgz#2b18d402bb920b65b13ad4ed8dfb6c386300dd84"
   integrity sha512-cvGzxbba6sav2zZkH8GPf2oGk9yYoD5qrNWdu9fRehifgnFZJMV+nuy2nON2roRO4yQQ+v7MK/Pktl/HgfsUXg==
@@ -150,15 +140,10 @@
   resolved "https://registry.yarnpkg.com/@sapphire/snowflake/-/snowflake-3.5.3.tgz#0c102aa2ec5b34f806e9bc8625fc6a5e1d0a0c6a"
   integrity sha512-jjmJywLAFoWeBi1W7994zZyiNWPIiqRRNAmSERxyg93xRGzNYvGjlZ0gR6x0F4gPRi2+0O6S71kOZYyr3cxaIQ==
 
-"@sapphire/snowflake@^3.0.1", "@sapphire/snowflake@^3.5.3", "@sapphire/snowflake@^3.5.4":
+"@sapphire/snowflake@^3.0.1", "@sapphire/snowflake@^3.5.3":
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/@sapphire/snowflake/-/snowflake-3.5.5.tgz#33a60ab4231e3cab29e8a0077f342125f2c8d1bd"
   integrity sha512-xzvBr1Q1c4lCe7i6sRnrofxeO1QTP/LKQ6A6qy0iB4x5yfiSfARMEQEghojzTNALDTcv8En04qYNIco9/K9eZQ==
-
-"@sapphire/utilities@^3.17.0", "@sapphire/utilities@^3.18.0":
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.18.1.tgz#c8b06bf5bd1e188d3bf1d7851adc84cda02143b4"
-  integrity sha512-zyEyQOQb2/t2mKRmu8T+M4r1Ulb+54BjwDS5pfzf6abGzTAcUg4VDWjHeKX7p3IgiZTcpN4Ij77b9k+K1KV4Lg==
 
 "@sindresorhus/is@^4.3.0":
   version "4.6.0"
@@ -216,10 +201,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-better-serialize@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/better-serialize/-/better-serialize-2.0.0.tgz#fb15fd49ad127ab78f2dcbfa78ded678deddfa93"
-  integrity sha512-TCnyg90XxOn18m7rx6dy8LN7Ds+TbNi+c75en6SaP051LhaxZgHNuTdfIu3cnVrhj2CyzlbnArN1aIka9I0sUw==
+atomically@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/atomically/-/atomically-1.7.0.tgz#c07a0458432ea6dbc9a3506fffa424b48bccaafe"
+  integrity sha512-Xcz9l0z7y9yQ9rdDaxlmaI4uJHf/T8g9hOEzJcsEqX2SjCj4J20uK7+ldkDHMbpJDK76wF7xEIgxc/vSlsfw5w==
 
 chalk-template@^0.4.0:
   version "0.4.0"
@@ -398,10 +383,10 @@ node-fetch@^2.6.5:
   dependencies:
     whatwg-url "^5.0.0"
 
-property-helpers@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/property-helpers/-/property-helpers-2.0.0.tgz#d172d26abffc67a2896f2297fbca1ea44a5fbe95"
-  integrity sha512-2jJhn4dMQw7reaNI88C21xm02nz9V6e75UNZr8ZikzXBefWuCzp+sopS97A39K6Ij6rDLbc9IVkSiRdCn8RdWg==
+on-change@^2.2.2:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/on-change/-/on-change-2.2.3.tgz#256d40d890e511151766e6dfc44b27953ccdafb8"
+  integrity sha512-yx48YQW3XsMHYWJ5n8oOgonrxsIJJNn1fqE3QlQpYS/I6XHvzTARHzaVbwFyJoSaZ4g7UTZheaaxHVtFKcNXgg==
 
 randombytes@^2.1.0:
   version "2.1.0"
@@ -410,15 +395,17 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
-reflect-metadata@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.2.2.tgz#400c845b6cba87a21f2c65c4aeb158f4fa4d9c5b"
-  integrity sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==
-
 safe-buffer@^5.1.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
   integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
+
+serialize-javascript@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-5.0.1.tgz#7886ec848049a462467a97d3d918ebb2aaf934f4"
+  integrity sha512-SaaNal9imEO737H2c05Og0/8LUXG7EnsZyMa8MzkmuHoELfT6txuj0cMqRj6zfPKnmQ1yasR4PCJc8x+M4JSPA==
+  dependencies:
+    randombytes "^2.1.0"
 
 serialize-javascript@^6.0.0:
   version "6.0.2"
@@ -499,6 +486,11 @@ undici@6.19.8:
   version "6.19.8"
   resolved "https://registry.yarnpkg.com/undici/-/undici-6.19.8.tgz#002d7c8a28f8cc3a44ff33c3d4be4d85e15d40e1"
   integrity sha512-U8uCCl2x9TK3WANvmBavymRzxbfFYG+tAu+fgx3zxQy3qdagQqBLwJVrdyO1TBfUXvfKveMKJZhpvUYoOjM+4g==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

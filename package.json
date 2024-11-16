@@ -15,7 +15,7 @@
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
     "@joshdb/core": "^1.2.7",
-    "@joshdb/json": "^3.0.0-next.4b1f96e.0",
+    "@joshdb/json": "^1.0.5",
     "chalk": "^4.1.2",
     "common-tags": "^1.8.1",
     "discord-api-types": "^0.26.1",
